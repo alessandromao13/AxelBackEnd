@@ -42,3 +42,38 @@ yarn-error.log*
 /coverage/
 /tmp/
 /temp/
+
+# Python-specific files to ignore
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore Cython or Python extension package build files
+*.pxd
+*.pxi
+*.so
+*.c
+*.cpp
+
+# Virtual environments
+venv/
+.venv/
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+
+# Package distribution files
+.Python
+env/
+develop-eggs/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+wheels/
+*.egg-info/
+.installed.cfg
