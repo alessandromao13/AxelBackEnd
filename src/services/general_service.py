@@ -2,7 +2,7 @@ import json
 import time
 
 from src.services.chat import create_summarization_chain
-from src.services.hf_triplets import generate_triplets
+# from src.services.hf_triplets import generate_triplets
 from src.services.make_graph import make_graph
 
 
@@ -15,13 +15,13 @@ def get_execution_time(start_time):
     print(f"Execution time: {execution_time:.6f} seconds")
 
 
-def generate_kg(text, user_id=None, topic=None, summary=None):
-    print(f"Building new graph from text: {text}")
-    if topic is None and summary is None:
-        topic, summary = produce_topic_and_summary(text)
-    triplets = generate_triplets(text)
-    graph = make_graph(text, triplets, topic, summary, user_id)
-    return graph
+# def generate_kg(text, user_id=None, topic=None, summary=None):
+#     print(f"Building new graph from text: {text}")
+#     if topic is None and summary is None:
+#         topic, summary = produce_topic_and_summary(text)
+#     triplets = generate_triplets(text)
+#     graph = make_graph(text, triplets, topic, summary, user_id)
+#     return graph
 
 
 def produce_topic_and_summary(text):

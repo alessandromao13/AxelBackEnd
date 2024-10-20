@@ -1,7 +1,6 @@
 from typing import Optional
 from fastapi import APIRouter, Body
 from src.services.chat import execute_chat_system
-from src.services.local_testing import generate_kg
 from src.persistence.mongoDB import get_graph_by_id, get_graph_by_user_id, get_user_threads
 from tests.dev.graph_generation_manager import run_graph_generation_system
 
