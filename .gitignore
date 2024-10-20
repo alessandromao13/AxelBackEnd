@@ -1,0 +1,79 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+
+# Editor-based HTTP Client requests
+/httpRequests/
+
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+
+# Ignore IntelliJ IDEA project files
+*.iml
+
+# Ignore XML files (if you want to ignore all .xml files)
+*.xml
+
+# Ignore .pycap files
+*.pycap
+
+# Ignore macOS system files
+.DS_Store
+
+# Node.js dependencies (if you're using Node/Angular)
+node_modules/
+
+# Angular build artifacts (if it's an Angular project)
+dist/
+out-tsc/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# IDE-specific files (common for various IDEs)
+/.idea/
+/.vscode/
+
+# Build and temporary files (common in Angular, Node, and testing)
+/coverage/
+/tmp/
+/temp/
+
+# Python-specific files to ignore
+# Compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Ignore Cython or Python extension package build files
+*.pxd
+*.pxi
+*.so
+*.c
+*.cpp
+
+# Virtual environments
+venv/
+.venv/
+
+# Temporary files
+*.bak
+*.swp
+*.tmp
+
+# Package distribution files
+.Python
+env/
+develop-eggs/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+wheels/
+*.egg-info/
+.installed.cfg

@@ -1,0 +1,15 @@
+create:
+  False
+
+## Configurazione per creare un grafo
+create_graph:
+  requirements:
+    text_document: "/Users/alessandromao/Desktop/STAGE/langchainGraphRagTest1/src/inputs/Marie_Curie_abstract.txt"
+    build_kg: true
+
+# Configurazione per dialogo con grafo esistente
+dialog_with_existing_graph:
+  requirements:
+    graph_id: "66f96f313163ec6c95e064b7" # todo: <-- this is going to be selected from UI
+    build_kg: false
+    text_document: null
