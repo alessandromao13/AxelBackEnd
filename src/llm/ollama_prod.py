@@ -21,11 +21,11 @@ class OllamaProdLLM(LLM):
         headers = {
             "Content-Type": "application/json"
         }
+
         data = {
-            # "model": "qwen2:1.5b",
             "model": "llama3.2:3b",
-            # "model": "llama3.2:1b",
-            "prompt": prompt
+            "prompt": prompt,
+            "temperature": 0
         }
         print("++ LLM Loading.. ++")
 

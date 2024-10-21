@@ -14,7 +14,7 @@ def generate_graph(user_id: str, input_text: str = Body(...), topic: str = Body(
     #  fixme: generate_kg uses transformer, run_graph_generation_system uses llama
     # generate_kg(input_text, user_id, topic, summary)
     print("GENERATE GRAPH ENDPOINT GOT", input_text, user_id, topic, summary)
-    # run_graph_generation_system(input_text, user_id, topic, summary)
+    run_graph_generation_system(input_text, user_id, topic, summary)
     return "OK"
 
 

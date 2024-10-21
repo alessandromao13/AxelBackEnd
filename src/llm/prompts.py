@@ -67,14 +67,16 @@ CHAT_TEMPLATE_NO_CONTEXT = ("consider the Documents context: \n"
                             )
 
 TOPIC_AND_SUMMARY_TEMPLATE = (
-    "You are a bot that is helpful. Your goal is to read an extract of the text provided \n"
-    "and output a python dict with a name suggestion and a comprehensive summary. \n"
-    "Here's the text: \n"
-    "{text} \n"
-    "Please output your result as: \n"
-    "{{'topic': 'the topic you chose', 'summary': 'the summary'}}. \n"
-    "Do not output any explanation or reasoning, only the requested dictionary. \n "
-)
+    """
+    You are a bot that is helpful. Your goal is to read an extract of the text provided \n
+    and output a python dict with a name suggestion and a comprehensive summary. \n
+    Here's the text: \n
+    {text}
+    Please output your result as: \n
+    {{"topic": "the topic you chose", "summary": "the summary"}}. \n
+    Do not output any explanation or reasoning, only the requested dictionary. \n 
+    """
+    )
 
 # fixme test
 TRIPLET_GENERATION_TEST = ("You are a bot that is helpful. \n"
@@ -204,3 +206,45 @@ RELATION_GENERATION_TEST = ("You are a bot that is helpful. \n"
                            "{input_text_chunk} \n"
                            "Begin!"
                            )
+
+# POST_PROCESSING_PROMPT = ("You are a bot that is helpful. \n"
+#                            "You are an expert of python and your job is to evaluate \n"
+#                            "the response produced by another LLM \n"
+#                            "And check if that response is correctly formatted as a python array of strings \n"
+#                            "If the structre is correct, just output it \n"
+#                            "If not, you should correct it, remembering that your response is going to be loaded \n"
+#                            "As python array and if you fail your task, all the chain is going to break \n."
+#                            "So, at every interaction you should always answer with a python array of strings. \n"
+#                            "Here's the structure: \n"
+#                            "{got_data} \n. "
+#                            "Begin!")
+POST_PROCESSING_PROMPT_ARRAY = ("You are a helpful bot specialized in Python. \n"
+                           "Your task is to review and correct the response produced by another LLM. \n"
+                           "Ensure the response is formatted as a Python array of strings, not as code. \n"
+                           "If the response is correct, output it as is. \n"
+                           "If the structure is wrong, correct it to be a valid Python array of strings. \n"
+                           "Remember, your response will be interpreted directly as a Python array. \n"
+                           "If you fail to provide the correct format, the entire process will break. \n"
+                           "Do not output any code or explanations. \n"
+                           "Always respond with a valid Python array of strings. \n"
+                           "Here’s the data you need to check: \n"
+                           "{got_data} \n"
+                           "Begin!")
+
+
+POST_PROCESSING_PROMPT_DICT = ("You are a helpful bot specialized in Python. \n"
+                               "Your task is to review and correct the response produced by another LLM. \n"
+                               "Ensure the response is formatted as a Python dictionary, not as code. \n"
+                               "If the response is correct, output it as is. \n"
+                               "If the structure is wrong, correct it to be a valid Python dictionary. \n"
+                               "Remember, your response will be interpreted directly as a Python dictionary. \n"
+                               "If you fail to provide the correct format, the entire process will break. \n"
+                               "Do not output any code or explanations. \n"
+                               "Always respond with a valid Python dictionary with double quotes \n"
+                               "and balanced brackets and lower case keys.\n"
+                               "Remember you should not add any information's to the data you receive, \n "
+                               "DO NOT ADD values, DO NOT ADD keys, DO NOT ADD BRACKETS UNLESS NECESSARY, \n "
+                               "STICK TO THE DATA YOU GET you should only correct it IF wrong. \n"
+                               "Here’s the data you need to check: \n"
+                               "{got_data} \n"
+                               "Begin!")

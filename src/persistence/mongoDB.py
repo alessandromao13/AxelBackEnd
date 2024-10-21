@@ -216,7 +216,7 @@ def update_current_thread(user_query, llm_result, current_thread):
 
 
 def save_partial_graph(document, run_num, text_chunk, user_id):
-    graph_creation_coll.insert_one({"user_id": 10, "run": run_num, "text_chunk": text_chunk, "graph_piece": document})
+    graph_creation_coll.insert_one({"user_id": user_id, "run": run_num, "text_chunk": text_chunk, "graph_piece": document})
 
 
 def clear_coll():

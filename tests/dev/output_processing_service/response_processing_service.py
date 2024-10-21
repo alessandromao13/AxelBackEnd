@@ -125,6 +125,7 @@ def parse_valid_python_dict_or_array(response):
 def process_llm_response(llm_res):
     try:
         cleaned_string = extract_inner_content(llm_res['text'])
+        print("CLEANED STRING", cleaned_string)
         loaded_result = json.loads(cleaned_string)
         return loaded_result
     except json.JSONDecodeError as e:
@@ -137,5 +138,5 @@ def extract_inner_content(response):
     end_index = response.rfind('}') + 1
     inner_content = response[start_index:end_index]
     inner_content = inner_content.replace("'", '"')
-    inner_content = inner_content.replace(".", '')
+    inner_content = inner_content.replace('"s ', "'s ")
     return inner_content

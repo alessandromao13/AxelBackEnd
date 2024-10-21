@@ -5,13 +5,15 @@ from tests.dev.llama_generate_title_and_summary.generate_title_and_summary impor
 
 
 def run_graph_generation_system(text, user_id, document_title=None, document_summary=None):
+    clear_coll()
+    print("RUB GRAPH GENERATION SYSTEM")
     if not document_title and not document_summary:
         document_title, document_summary = produce_topic_and_summary(text)
         print("Produced title and summary for the document:")
         print(f"Title: {document_title} \n")
         print(f"Summary: {document_summary} \n")
         # todo: save to mongoDB for persistence
-
+    print("EXTRACTING TRIPLETS")
     failed_runs = extract_triplets_from_text(text, user_id)
     print(f"you should ask the user about this runs.. {failed_runs}")
     final_triplets = collect_triplet_chunks(user_id)
