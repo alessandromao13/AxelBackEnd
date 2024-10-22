@@ -10,10 +10,10 @@ router = APIRouter()
 # 1. The user generates a KG --> generate graph
 @router.post("/generate-graph/{user_id}")
 def generate_graph(user_id: str, input_text: str = Body(...), topic: str = Body(...), summary: str = Body(...)):
-    print(f"GOT topic {topic}, summary {summary}")
+    # print(f"GOT topic {topic}, summary {summary}")
     #  fixme: generate_kg uses transformer, run_graph_generation_system uses llama
     # generate_kg(input_text, user_id, topic, summary)
-    print("GENERATE GRAPH ENDPOINT GOT", input_text, user_id, topic, summary)
+    print("GENERATE GRAPH ENDPOINT GOT", "User id", user_id, "topic", topic, "summary", summary, "input text", input_text)
     run_graph_generation_system(input_text, user_id, topic, summary)
     return "OK"
 

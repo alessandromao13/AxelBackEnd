@@ -19,6 +19,7 @@ def generate_knowledge_graph(text, final_triplets, topic, summary, user_id=None)
                       "graph_id": "", "topic": topic, "summary": summary,
                       "nodes": [], "relations": []
                       }
+    print("++ FINAL TRIPLETS", final_triplets)
     for triplet in final_triplets:
         head = triplet['head']
         tail = triplet['tail']

@@ -82,8 +82,9 @@ def generate_triplets_from_chunk_and_entities(got_entities, chunk, user_id):
 
     with open(output_file, "a") as file:
         print(f"Chunk: {chunk}")
-        print(f"Entities: {got_entities}")
+        # print(f"Entities: {got_entities}")
         result = triplet_chain.invoke({"detected_entities": got_entities, "input_text_chunk": chunk})
+        print("+++ TRIPLETS ", result)
         # dict_result = parse_valid_python_dict_or_array(result['text'])
         dict_result = ast.literal_eval(result['text'])
         # dict_result = json.loads(result['text'])
@@ -171,6 +172,7 @@ def extract_triplets_from_text(input_text, user_id):
         # extract entities from the sentence
         got_entities = generate_entities_from_chunk(chunk)
         # generate triplets based on sentence and entities detected
+        print("+++ GOT ENTITIES", got_entities)
         failed = generate_triplets_from_chunk_and_entities(got_entities, chunk, user_id)
 
         # save the failed runs

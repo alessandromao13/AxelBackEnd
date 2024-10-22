@@ -18,9 +18,9 @@ def produce_topic_and_summary(text):
     # processed_res = process_llm_response(llm_result)
     # processed_res = test_data_extraction_dict(llm_result['text'])
     # processed_res = ast.literal_eval(llm_result['text'])
-    print("LLM RES", llm_result)
+    print("+++ Topic and summary", llm_result)
     processed_res = json.loads(llm_result['text'])
-    print("PROCESSED RESULT", processed_res)
+    # print("PROCESSED RESULT", processed_res)
     try:
         topic = processed_res['topic']
         summary = processed_res['summary']

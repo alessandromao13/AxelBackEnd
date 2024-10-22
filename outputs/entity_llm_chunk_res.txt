@@ -326,3 +326,104 @@ During this time, Jonas Salk, an American virologist, made another monumental co
 The story of science is not just a tale of individual geniuses but also of collaboration across generations and disciplines. Whether it was the Curies’ work in radioactivity, Einstein’s contributions to relativity, Tesla’s innovations in electricity, or Watson and Crick’s discovery of DNA, the progress of human knowledge has been driven by a relentless pursuit of understanding and a shared dedication to uncovering the mysteries of the universe..
 Response: ['Penicillin', 'Nobel Prize', 'Howard Florey', 'Ernst Boris Chain', 'World War II', 'Jonas Salk', 'Virologist', 'Polio vaccine', 'Curies', 'Radioactivity', 'Einstein', 'Relativity', 'Tesla', 'Electricity', 'Watson', 'Crick', 'DNA']
 ----------------------------------------
+Chunk: Marie Curie, born in 1867 in Warsaw, Poland, was a pioneering physicist and chemist. She is best known for her research on radioactivity, a term that she coined herself. Alongside her husband, Pierre Curie, whom she married in 1895, she discovered the radioactive elements polonium and radium in 1898. For their groundbreaking work, the couple received the Nobel Prize in Physics in 1903, making Marie the first woman to win a Nobel Prize. Later, in 1911, she won a second Nobel Prize, this time in Chemistry, for her work in radioactivity, making her the only person to win Nobel Prizes in two different scientific fields.
+Marie and Pierre had two daughters, Irène and Ève. Irène Joliot-Curie, following in her parents' footsteps, became a prominent scientist and, together with her husband Frédéric Joliot-Curie, won the Nobel Prize in Chemistry in 1935 for their discovery of artificial radioactivity.
+Response: ['Marie Curie', '1867', 'Warsaw', 'Poland', 'Physicist', 'Chemist', 'Pierre Curie', '1895', 'Polonium', 'Radium', 'Nobel Prize in Physics', '1903', 'Irène Joliot-Curie', 'Ève', 'Frédéric Joliot-Curie']
+----------------------------------------
+Chunk: Ève Curie, on the other hand, pursued a career in writing and diplomacy, penning a famous biography of her mother, titled Madame Curie in 1937.
+The Curie family legacy extended further. Marie's grandson, Pierre Joliot-Curie, became a renowned biologist, contributing significantly to the understanding of photosynthesis. Meanwhile, the Curie Institute, established in Paris in 1921, continues to be a leading center for medical research, particularly in cancer treatment and radiology.
+Marie Curie's scientific journey was closely linked to the University of Paris, where she conducted much of her research. After her husband’s tragic death in 1906, she took over his position as the Chair of Physics, becoming the first woman to hold this prestigious role.
+Response: ['Ève Curie', 'Marie Curie', 'Pierre Joliot-Curie', 'Madame Curie']
+----------------------------------------
+Chunk: During World War I, she contributed significantly to the war effort by developing mobile radiography units, known as "Little Curies," which were used to diagnose soldiers’ injuries on the battlefield.
+Beyond the Curies, the scientific community in the early 20th century saw other giants. Albert Einstein, the famous physicist known for his theory of relativity, corresponded frequently with Marie Curie. In fact, in 1913, Einstein and Curie both attended the prestigious Solvay Conference in Brussels, which brought together many of the greatest scientific minds of the era, including Max Planck, Niels Bohr, and Erwin Schrödinger. These conferences were critical to shaping the future of quantum mechanics, a field that later influenced technologies like semiconductors and computing.
+Elsewhere in Europe, across the Atlantic, Nikola Tesla, born in 1856 in Smiljan, Croatia, was revolutionizing the field of electrical engineering.
+Response: ['World War I', 'Marie Curie', 'Albert Einstein', 'Max Planck', 'Niels Bohr', 'Erwin Schrödinger', 'Nikola Tesla']
+----------------------------------------
+Chunk: His invention of alternating current (AC) power generation and transmission systems transformed how electricity was used globally. Tesla’s rivalry with Thomas Edison, the American inventor and businessman, over direct current (DC) versus alternating current (AC) became legendary in what was termed "The War of the Currents." While Edison championed DC, Tesla’s AC system eventually won out, leading to widespread adoption in the United States, particularly after the successful Niagara Falls power project in 1896.
+Thomas Edison, best known for his inventions like the incandescent light bulb and phonograph, was also a shrewd entrepreneur. He founded General Electric, one of the largest corporations in the world today. Edison’s laboratory in Menlo Park, New Jersey, became a hub of innovation, where he and his team developed over 1,000 patents.
+At the same time, across the Atlantic, James Clerk Maxwell, a Scottish physicist born in 1831, was laying the foundations of classical electromagnetism.
+Response: ['Tesla', 'Thomas Edison', 'James Clerk Maxwell']
+----------------------------------------
+Chunk: His famous Maxwell’s equations, published in 1865, described the behavior of electric and magnetic fields and predicted the existence of electromagnetic waves, a discovery that eventually led to the development of radio, television, and wireless communication.
+Speaking of wireless communication, Guglielmo Marconi, an Italian inventor, built on Maxwell’s work to develop the first practical system of wireless telegraphy in the late 19th and early 20th centuries. Marconi’s wireless radio system gained international fame in 1901 when he successfully transmitted the first transatlantic radio signal from Cornwall, England, to Newfoundland, Canada. For his contributions, Marconi shared the Nobel Prize in Physics in 1909 with Karl Ferdinand Braun, a German physicist who improved the design of the radio transmitter.
+Another pivotal figure in 20th-century science was Werner Heisenberg, born in 1901 in Würzburg, Germany.
+Response: ['Maxwell', '1865', 'electric field', 'magnetic field', 'electromagnetic wave', 'radio', 'television', 'wireless communication', 'Guglielmo Marconi', 'Italian', 'inventor', 'wireless telegraphy', '19th century', '20th century', 'Cornwall', 'England', 'Newfoundland', 'Canada', 'Nobel Prize in Physics', 'Karl Ferdinand Braun', 'German physicist', 'radio transmitter', 'Werner Heisenberg', '1901', 'Würzburg', 'Germany']
+----------------------------------------
+Chunk: Heisenberg is best known for his uncertainty principle, a fundamental concept in quantum mechanics, which he developed in 1927. His work laid the groundwork for much of modern quantum theory, alongside other luminaries like Niels Bohr, who was based in Copenhagen and formulated the Bohr model of the atom.
+Meanwhile, during the same period, another scientific revolution was unfolding in biology. Charles Darwin’s theory of evolution by natural selection, first published in On the Origin of Species in 1859, had far-reaching implications. Building on Darwin’s ideas, Gregor Mendel, an Austrian monk, conducted groundbreaking experiments in the 1860s that established the principles of heredity, laying the foundations for modern genetics.
+Response: ['Heisenberg', 'Uncertainty Principle', 'Quantum Mechanics', 'Niels Bohr', 'Copenhagen', 'Bohr Model', 'Charles Darwin', 'On the Origin of Species', 'Gregor Mendel']
+----------------------------------------
+Chunk: It wasn’t until the early 20th century, however, that Mendel’s work was rediscovered by scientists like Hugo de Vries and Carl Correns, who helped integrate Mendel’s findings into Darwinian evolutionary theory, leading to the modern synthesis of biology.
+Later, in the mid-20th century, James Watson and Francis Crick, working at the Cavendish Laboratory in Cambridge, UK, uncovered the structure of DNA in 1953. Their discovery, aided by Rosalind Franklin’s critical X-ray diffraction images, revolutionized biology and paved the way for the development of modern molecular biology and genetics. Watson, Crick, and Maurice Wilkins were awarded the Nobel Prize in Physiology or Medicine in 1962 for this groundbreaking work, though Franklin's contributions were only posthumously recognized.
+As biology advanced, so too did medicine. Alexander Fleming, a Scottish bacteriologist, made a serendipitous discovery in 1928 when he found that a mold, Penicillium notatum, produced a substance capable of killing bacteria.
+Response: ['Mendel', 'Hugo de Vries', 'Carl Correns', 'Darwin', 'James Watson', 'Francis Crick', 'Rosalind Franklin', 'Maurice Wilkins', 'Alexander Fleming']
+----------------------------------------
+Chunk: This substance, penicillin, became the world’s first antibiotic and revolutionized medicine. Fleming shared the Nobel Prize in Physiology or Medicine in 1945 with Howard Florey and Ernst Boris Chain, who helped develop penicillin into a widely used treatment during World War II.
+During this time, Jonas Salk, an American virologist, made another monumental contribution to medicine by developing the first successful polio vaccine in 1955. This vaccine virtually eradicated polio, a disease that had crippled thousands of people, especially children, worldwide.
+The story of science is not just a tale of individual geniuses but also of collaboration across generations and disciplines. Whether it was the Curies’ work in radioactivity, Einstein’s contributions to relativity, Tesla’s innovations in electricity, or Watson and Crick’s discovery of DNA, the progress of human knowledge has been driven by a relentless pursuit of understanding and a shared dedication to uncovering the mysteries of the universe..
+Response: ['Penicillin', 'Nobel Prize', 'Howard Florey', 'Ernst Boris Chain', 'World War II', 'Jonas Salk', 'Virologist', 'Polio vaccine', 'Curies', 'Radioactivity', 'Einstein', 'Relativity', 'Tesla', 'Electricity', 'Watson', 'Crick', 'DNA']
+----------------------------------------
+Chunk: ### Pizza Margherita
+
+**Ingredienti**
+
+*Per l'impasto:*
+- 500 g di farina 00
+- 325 ml di acqua
+- 10 g di sale
+- 2 g di zucchero
+- 2 g di lievito di birra secco (o 6 g di lievito di birra fresco)
+- 1 cucchiaio di olio extravergine d'oliva
+
+*Per il condimento:*
+- 300 g di pomodori pelati (o passata di pomodoro)
+- 250 g di mozzarella (preferibilmente di bufala)
+- Foglie di basilico fresco
+- Sale q.b.
+- Olio extravergine d'oliva q.b.
+
+**Procedimento**
+
+1. **Preparare l'impasto:**
+   - In una ciotola, sciogliere il lievito e lo zucchero nell'acqua tiepida. Lasciare riposare per 5-10 minuti.
+   - In una ciotola capiente, mescolare la farina e il sale. Aggiungere l'acqua con il lievito e l'olio d'oliva.
+   - Impastare fino a ottenere un composto liscio ed elastico. Se necessario, aggiungere un po’ di farina.
+   - Formare una palla e metterla in una ciotola unta d'olio, coprire con un canovaccio e lasciare lievitare in un luogo caldo per 2-3 ore, o fino a quando l'impasto raddoppia di volume.
+
+2.
+Response: ['Pizza Margherita', 'Ingredienti', "Per l'impasto", 'Farina 00', 'Acqua', 'Sale', 'Zucchero', 'Lievito di birra secco', "Olio extravergine d'oliva", 'Per il condimento', 'Pomodori pelati', 'Mozzarella', 'Basilico fresco', 'Procedimento', "Preparare l'impasto", 'Ciotola', 'Lievito', 'Zucchero', 'Acqua', 'Farina', 'Sale', "Olio d'oliva"]
+----------------------------------------
+Chunk: **Preparare il condimento:**
+   - Frullare i pomodori pelati con un pizzico di sale fino a ottenere una salsa liscia. Se preferisci, puoi anche utilizzare la passata di pomodoro.
+   - Tagliare la mozzarella a fette e lasciarla scolare per eliminare l'eccesso di liquido.
+
+3. **Stendere l'impasto:**
+   - Una volta lievitato, rovesciare l'impasto su una superficie infarinata e dividerlo in 2-3 porzioni.
+   - Stendere ogni porzione con le mani o un mattarello fino a ottenere uno spessore di circa 0,5 cm.
+
+4. **Condire la pizza:**
+   - Preriscaldare il forno alla massima temperatura (250°C o più, se possibile).
+   - Trasferire l'impasto su una teglia rivestita di carta da forno o su una pietra refrattaria.
+   - Spalmare uno strato di salsa di pomodoro sull'impasto, lasciando un bordo.
+   - Aggiungere le fette di mozzarella e qualche foglia di basilico.
+   - Condire con un filo d'olio extravergine d'oliva.
+
+5.
+Response: ['Pomodoro', 'Sale', 'Mozzarella', 'Impasto', 'Forno', 'Teglia', 'Basilico', 'Olio Extravergine']
+----------------------------------------
+Chunk: **Cuocere la pizza:**
+   - Infornare la pizza e cuocere per 10-15 minuti, o fino a quando la mozzarella è fusa e l'impasto è dorato e croccante.
+   - Aggiungere altre foglie di basilico fresco appena sfornata.
+
+6. **Servire:**
+   - Tagliare la pizza a fette e servire calda.
+
+**Consigli**
+- Puoi aggiungere un po’ di origano per un sapore extra.
+- Assicurati che il forno sia ben caldo prima di infornare la pizza per ottenere una buona croccantezza.
+
+Buon appetito!
+.
+Response: ['Pizza', 'Mozzarella', 'Impasto', 'Basilico', 'Origano']
+----------------------------------------

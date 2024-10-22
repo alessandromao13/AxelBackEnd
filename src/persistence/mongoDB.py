@@ -47,6 +47,10 @@ def count_thread_id():
     return threads_coll.count_documents({})
 
 
+def remove_thread_by_id(thread_id):
+    threads_coll.delete_one({"thread_id": str(thread_id)})
+
+
 def get_graph_by_id(graph_id):
     print(f"Using existing graph with ID: {graph_id}")
     if graph_id:

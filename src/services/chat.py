@@ -76,17 +76,25 @@ def execute_chat_system(user_query, user_id, graph_id, thread_id):
     chat_history = load_chat_history(current_thread_document)
     print("++ Current Thread", current_thread_document)
     print("++ Chat History", chat_history)
-
+    visited_nodes = None
+    visited_edges = None
     # RAG Management and Context
+    print("++++ GETTING GRAPH WITH ID", graph_id)
     graph = get_graph_by_id(graph_id)
-    got_context, visited_nodes, visited_edges = build_context(graph, user_query, graph_id)
-    print("GOT CONTEXT", got_context)
-    print("GOT VISITED NODES", visited_nodes)
-    print("GOT VISITED EDGES", visited_edges)
-    chain = create_chain(visited_nodes)
-    # LLM Setup and execution
-    print("GOT CONTEXT", got_context)
+    print("_+++++++ GOT GRAPH FROM MONGO", graph)
+    if graph:
+        got_context, visited_nodes, visited_edges = build_context(graph, user_query, graph_id)
+        print("GOT CONTEXT", got_context)
+        print("GOT VISITED NODES", visited_nodes)
+        print("GOT VISITED EDGES", visited_edges)
+        chain = create_chain(visited_nodes)
+        print("GOT CONTEXT", got_context)
+    else:
+        got_context = build_context()
+        chain = create_chain(None)
+    print("LAUNCHUNG CHAIN WITH QUERY", user_query)
     llm_result = execute_chat_request(user_query, got_context, chain, chat_history)
+
     #  Memory Management
     update_current_thread(user_query, llm_result, current_thread_document)
     return {"llm_res": llm_result, "context": got_context, "nodes": visited_nodes, "edges": visited_edges,

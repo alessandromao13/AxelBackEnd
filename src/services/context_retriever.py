@@ -7,8 +7,12 @@ from src.persistence.mongoDB import get_possible_entities, update_edge_usage, ge
 from src.services.prompt_service import get_entity_recognition_template
 
 
-def build_context(got_graph, query, graph_id):
-    return build_context_from_graph(got_graph, query, graph_id)
+def build_context(got_graph=None, query=None, graph_id=None):
+    if got_graph:
+        context = build_context_from_graph(got_graph, query, graph_id)
+    else:
+        context = build_generic_context()
+    return context
 
 
 def build_backup_context(query, used_graph_id):
@@ -35,6 +39,12 @@ def build_context_from_graph(got_graph, query, graph_id):
         return context, None, None
 
 
+def build_generic_context():
+    return ("The user did non select any document to chat with, point out that he needs to select a \n"
+            "document if he ask some specific information about a domain you don't know, \n"
+            "just chat if the conversation is generic")
+
+
 def get_entities_in_query(query, graph_id):
     template = get_entity_recognition_template()
     prompt = PromptTemplate(
@@ -47,8 +57,8 @@ def get_entities_in_query(query, graph_id):
     print("++++ POSSIBLE ENTITIES", possible_ents)
     print("++ Template ", template)
     print("++ Prompt", prompt)
-    print("+++ LLM Lorading +++")
-    response = chain.invoke({"user_query": query, "entities": get_possible_entities(graph_id)})
+    print("+++ LLM Loading +++")
+    response = chain.invoke({"user_query": query, "entities": possible_ents})
     print("+++ RES +++", response)
     entities = extract_entities(response, possible_ents)
     print("ENTITIES FOUND", entities)
@@ -62,10 +72,6 @@ def extract_entities(response, possible_ents):
     if match:
         items_str = match.group(1)
         items = [item.strip().strip('"').strip("'") for item in items_str.split(',')]
-        print("LENGHT")
-        # fixme: Attenzione a questo
-        if len(items) >= 3:
-            return []
         return items
     else:
         return []
@@ -94,3 +100,7 @@ def get_entity_knowledge(entity, graph, graph_id):
             update_edge_usage(graph_id, {"head": src, "tail": node, "relation": relation})
 
     return results
+
+
+# if __name__ == '__main__':
+#     print(get_entities_in_query("Who was Marie Curie family?", "3"))
