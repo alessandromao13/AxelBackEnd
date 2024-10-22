@@ -1,5 +1,7 @@
 from typing import Optional
 from fastapi import APIRouter, Body
+from fastapi.params import File
+
 from src.services.chat import execute_chat_system
 from src.persistence.mongoDB import get_graph_by_id, get_graph_by_user_id, get_user_threads
 from tests.dev.graph_generation_manager import run_graph_generation_system
@@ -7,7 +9,7 @@ from tests.dev.graph_generation_manager import run_graph_generation_system
 router = APIRouter()
 
 
-# 1. The user generates a KG --> generate graph
+# 1. The user generates a KG from a text --> generate graph
 @router.post("/generate-graph/{user_id}")
 def generate_graph(user_id: str, input_text: str = Body(...), topic: str = Body(...), summary: str = Body(...)):
     # print(f"GOT topic {topic}, summary {summary}")
@@ -25,8 +27,12 @@ def get_graph_by_graph_id(graph_id: str):
 
 
 # 3. The user opens the chat or the gallery --> get graphs by user id
-
 @router.get("/get-graph-by-user-id/{user_id}")
 def get_graph_by_users_id(user_id):
     return get_graph_by_user_id(user_id)
 
+
+# 1.2 The user generates a KG from a pdf --> generate graph
+@router.post("/generate-graph-pdf/{user_id}")
+def generate_graph(user_id: str, uploaded_file: File = Body(...), topic: str = Body(...), summary: str = Body(...)):
+    return "OK"
