@@ -1,9 +1,7 @@
 import os
 import uuid
-
 import pdfplumber
 from pathlib import Path
-
 from langchain.retrievers import MultiVectorRetriever
 from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
@@ -11,19 +9,14 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.stores import InMemoryStore
 from unstructured.partition.pdf import partition_pdf
-
-
-from langchain.embeddings.base import Embeddings
-import requests
-
 from src.llm.ollama_embeddings import OllamaEmbeddings
 from src.llm.ollama_prod import OllamaProdLLM
+from src.persistence.mongoDB import save_user_rag_document
 
 
 def extract_tables_with_pdfplumber(content_path, file_to_read):
     # Convert to Path object
     full_path = Path(content_path) / file_to_read
-    path = '../../assets/pdf/1234/ChatGPT_A_brief_narrative_review.pdf'
     print(f"Reading from: {full_path} using pdfplumber")
     got_tables = []
     try:
@@ -84,8 +77,9 @@ def tables_summarize(data_cat):
     return produced_table_summaries
 
 
-def manage_rag_production(user_id, file_name):
-    path = f"../../assets/pdf/{user_id}"
+async def manage_rag_production(user_id, uploaded_file):
+    file_name = uploaded_file.filename
+    path = f"../assets/pdf/{user_id}"
     raw_pdf_elements = doc_partition(path, file_name)
     print("GOT RAW ELEMS", raw_pdf_elements)
     texts, _ = data_category(raw_pdf_elements)
@@ -93,9 +87,10 @@ def manage_rag_production(user_id, file_name):
     tables = extract_tables_with_pdfplumber(path, file_name)
     print("GOT TABLES", tables)
     table_summaries = tables_summarize(tables)
-    rag_id = str(uuid.uuid4())
+    document_id = str(uuid.uuid4())
+    rag_id = f'chroma_store_{document_id}'
     print("CHECKING PERSISTENCE PATH")
-    chroma_persistence_path = f"/home/alessandroaw/Desktop/RAG/{user_id}/chroma_store_{rag_id}"
+    chroma_persistence_path = f"/home/alessandroaw/Desktop/RAG/{user_id}/{rag_id}"
     if not os.path.exists(chroma_persistence_path):
         os.makedirs(chroma_persistence_path)
         print(f"Directory '{chroma_persistence_path}' created.")
@@ -105,7 +100,6 @@ def manage_rag_production(user_id, file_name):
     vectorstore = Chroma(collection_name="multi_modal_rag",
                          embedding_function=OllamaEmbeddings(),
                          persist_directory=chroma_persistence_path)
-
     store = InMemoryStore()
     id_key = "doc_id"
     retriever = MultiVectorRetriever(vectorstore=vectorstore, docstore=store, id_key=id_key)
@@ -121,12 +115,39 @@ def manage_rag_production(user_id, file_name):
         Document(page_content=s, metadata={id_key: table_ids[i]})
         for i, s in enumerate(table_summaries)
     ]
-    retriever.vectorstore.add_documents(summary_tables)
-    retriever.docstore.mset(list(zip(table_ids, tables)))
+    if len(summary_tables) > 0 and len(table_ids) > 0 and len(tables) > 0:
+        retriever.vectorstore.add_documents(summary_tables)
+        retriever.docstore.mset(list(zip(table_ids, tables)))
     print("PERSIST")
     vectorstore.persist()
     print("ALL GOOD")
-    return 200
+    rename_file(user_id, document_id, file_name)
+    save_user_rag_document(document_id, rag_id, user_id)
+    return {"rag_id": document_id}
+
+
+def rename_file(user_id: str, document_id: str, file_name: str):
+    """
+    Renames the uploaded file to new document id.
+
+    Args:
+    - user_id: The user's ID to navigate to the correct directory.
+    - document_id: The new document ID to rename the file.
+    - file_name: The original name of the file to be renamed.
+
+    Returns:
+    - str: The new file path after renaming.
+    """
+    print("RENAMING FILE", file_name, "to", document_id)
+    user_directory = os.path.join(f"../assets/pdf", user_id)
+    original_file_path = os.path.join(user_directory, file_name)
+    if not os.path.isfile(original_file_path):
+        raise FileNotFoundError(f"The file {original_file_path} does not exist.")
+    file_extension = os.path.splitext(file_name)[1]
+    new_file_name = f"{document_id}{file_extension}"
+    new_file_path = os.path.join(user_directory, new_file_name)
+    os.rename(original_file_path, new_file_path)
+
 
 
 # fixme --> I can eventually save metadata and reconstruct the ChromaStore later
@@ -201,13 +222,13 @@ def manage_rag_production(user_id, file_name):
 #
 #     return vectorstore
 
-if __name__ == '__main__':
-    path = "./"
-    file_name = "ChatGPT_A_brief_narrative_review.pdf"
-    print("EXTRACTING RAW ELEMENTS")
-    raw_pdf_elements = doc_partition(path, file_name)
-    texts, _ = data_category(raw_pdf_elements)
-    print("TEXTS:", texts)
+# if __name__ == '__main__':
+#     path = "./"
+#     file_name = "ChatGPT_A_brief_narrative_review.pdf"
+#     print("EXTRACTING RAW ELEMENTS")
+#     raw_pdf_elements = doc_partition(path, file_name)
+#     texts, _ = data_category(raw_pdf_elements)
+#     print("TEXTS:", texts)
     # tables = extract_tables_with_pdfplumber(path, file_name)
     # print("TABLES:", tables)
     # table_summaries = tables_summarize(tables)

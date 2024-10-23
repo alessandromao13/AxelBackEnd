@@ -39,7 +39,7 @@ def clear_files():
 if __name__ == '__main__':
     clear_coll()
     clear_files()
-    with open("../../src/inputs/Aliens_abstract.txt", 'r') as file:
+    with open("../../src/assets/text/Aliens_abstract.txt", 'r') as file:
         text = file.read()
     print("TEXT IS", text)
     run_graph_generation_system(text, 10, None, None)

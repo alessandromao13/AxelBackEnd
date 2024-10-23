@@ -11,13 +11,12 @@ from src.llm.ollama_chat import OllamaChatLLM
 from src.llm.ollama_embeddings import OllamaEmbeddings
 
 
-def generate_and_run_rag_bot(user_query, user_id, rag_id):
-    chroma_persistence_path = f"/home/alessandroaw/Desktop/RAG/{user_id}/{rag_id}"
-    print("PERSISTENCE PATH", chroma_persistence_path)
+def generate_rag_bot(user_id, rag_id):
+    chroma_persistence_path = f"/home/alessandroaw/Desktop/RAG/{user_id}/chroma_store_{rag_id}"
     vectorstore = Chroma(collection_name="multi_modal_rag",
                          embedding_function=OllamaEmbeddings(),
                          persist_directory=chroma_persistence_path)
-    print("GOT VECTOR STORE", vectorstore)
+
     # todo --> Check if this does anything, remove in case it does not
     store = InMemoryStore()
     id_key = "doc_id"
@@ -35,8 +34,7 @@ def generate_and_run_rag_bot(user_query, user_id, rag_id):
     )
 
     chain = retrieval | prompt | model | StrOutputParser()
-    res = chain.invoke(user_query)
-    return res
+    return chain
 
 
 # if __name__ == '__main__':

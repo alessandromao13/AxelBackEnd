@@ -133,7 +133,7 @@
 #
 #     failed_extr = []
 #
-#     with open("../src/inputs/Aliens_abstract.txt", "r") as file:
+#     with open("../src/assets/Aliens_abstract.txt", "r") as file:
 #         input_text = file.read()
 #     print(input_text)
 #

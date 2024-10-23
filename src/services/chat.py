@@ -11,6 +11,7 @@ from src.services.context_retriever import build_context
 from src.services.hf_triplets import chunk_text
 from src.services.prompt_service import get_chat_template, get_topic_and_summary_template, \
     get_chat_template_no_context, get_triplet_production_template
+from tests.classic_rag_test.RAG_usage import generate_and_run_rag_bot
 
 
 def create_graph_chain(graph):
@@ -100,6 +101,9 @@ def execute_chat_system(user_query, user_id, graph_id, thread_id):
     return {"llm_res": llm_result, "context": got_context, "nodes": visited_nodes, "edges": visited_edges,
             "thread_id": current_thread_document['thread_id']}
 
+
+def execute_chat_system_pdf(user_query, user_id, rag_id, thread_id):
+    return generate_and_run_rag_bot(user_query, user_id, rag_id)
 
 #  fixme chat system test
 # if __name__ == '__main__':

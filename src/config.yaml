@@ -4,7 +4,7 @@ create:
 ## Configurazione per creare un grafo
 create_graph:
   requirements:
-    text_document: "/Users/alessandromao/Desktop/STAGE/langchainGraphRagTest1/src/inputs/Marie_Curie_abstract.txt"
+    text_document: "/Users/alessandromao/Desktop/STAGE/langchainGraphRagTest1/src/assets/Marie_Curie_abstract.txt"
     build_kg: true
 
 # Configurazione per dialogo con grafo esistente
