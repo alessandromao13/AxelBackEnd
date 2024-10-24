@@ -103,11 +103,7 @@ def execute_chat_system(user_query, user_id, graph_id, thread_id):
 
 
 def execute_chat_system_pdf(user_query, user_id, rag_id, thread_id):
-    return generate_and_run_rag_bot(user_query, user_id, rag_id)
-
-#  fixme chat system test
-# if __name__ == '__main__':
-#     print("STARTING")
-#     res = execute_chat_system("What about the document? what is the general focus?", "1234", "7", "79")
-#     print("+", res)
-
+    current_thread_document = load_or_create_thread(thread_id, rag_id, user_id)
+    llm_res = generate_and_run_rag_bot(user_query, user_id, rag_id)
+    update_current_thread(user_query, llm_res, current_thread_document)
+    return {"llm_res": llm_res}

@@ -165,6 +165,8 @@ def load_or_create_thread(thread_id, graph_id, user_id):
     try:
         if thread_id:
             found_thread = threads_coll.find_one({"thread_id": str(thread_id), "user_id": str(user_id)})
+            if not found_thread:
+                return create_new_thread(user_id, graph_id)
             return found_thread
         else:
             return create_new_thread(user_id, graph_id)
@@ -204,12 +206,15 @@ def load_chat_history(found_thread):
 
 # OK
 def update_current_thread(user_query, llm_result, current_thread):
-    if user_query:
-        current_thread['messages'].append({"from": "USER", "content": user_query})
-        threads_coll.update_one({"thread_id": str(current_thread['thread_id'])}, {"$set": current_thread})
-    if llm_result:
-        current_thread['messages'].append({"from": "BOT", "content": llm_result})
-        threads_coll.update_one({"thread_id": str(current_thread['thread_id'])}, {"$set": current_thread})
+    if current_thread:
+        if user_query:
+            current_thread['messages'].append({"from": "USER", "content": user_query})
+            threads_coll.update_one({"thread_id": str(current_thread['thread_id'])}, {"$set": current_thread})
+        if llm_result:
+            current_thread['messages'].append({"from": "BOT", "content": llm_result})
+            threads_coll.update_one({"thread_id": str(current_thread['thread_id'])}, {"$set": current_thread})
+    else:
+        print("++++++++++ NO THREAD FOUND ++++++++++++++++++")
 
 
 def save_partial_graph(document, run_num, text_chunk, user_id):
@@ -233,9 +238,9 @@ def get_triplet_chunks_by_user_id(user_id):
     return graph_creation_coll.find({"user_id": user_id})
 
 
-def save_user_rag_document(document_id, rag_id, user_id):
+def save_user_rag_document(file_name, document_id, rag_id, user_id):
     try:
-        insertion_result = documents_coll.insert_one({"document_id": document_id, "rag_id": rag_id, "user_id": user_id})
+        insertion_result = documents_coll.insert_one({"title": file_name, "document_id": document_id, "rag_id": rag_id, "user_id": user_id})
         if not insertion_result:
             print("ERROR IN DOCUMENT INSERTION")
     except Exception as e:
@@ -251,7 +256,6 @@ def get_rags_by_user_id(user_id):
                 "title": document['title'],
                 "rag_id": document['rag_id'],
                 "document_id": document['document_id'],
-                "document": get_document_by_document_id(document['document_id'], user_id)
                 })
 
         if not results:
@@ -275,3 +279,29 @@ def get_document_by_document_id(document_id: str, user_id: str):
                 raise HTTPException(status_code=404, detail="Document not found.")
             return FileResponse(path=document_path, media_type='application/pdf', filename=file_name)
     raise HTTPException(status_code=404, detail=f"Document with ID {document_id} not found for user {user_id}.")
+
+
+def delete_document_by_document_id(document_id: str, user_id: str):
+    user_directory = f"../assets/pdf/{user_id}"
+    for file_name in os.listdir(user_directory):
+        file_without_extension = os.path.splitext(file_name)[0]
+        if file_without_extension == document_id:
+            file_path = os.path.join(user_directory, file_name)
+            if os.path.exists(file_path):
+                os.remove(file_path)
+                print(f"Document {file_name} deleted successfully.")
+                delete_document_entry(document_id, user_id)
+                return 200
+            else:
+                print(f"File {file_path} not found.")
+                return 404
+    print("Document not found.")
+    return 404
+
+
+def delete_document_entry(document_id, user_id):
+    try:
+        documents_coll.delete_one({"document_id": document_id, "user_id": user_id})
+    except Exception as e:
+        print(f"Error in document deletion {e}")
+

@@ -122,7 +122,7 @@ async def manage_rag_production(user_id, uploaded_file):
     vectorstore.persist()
     print("ALL GOOD")
     rename_file(user_id, document_id, file_name)
-    save_user_rag_document(document_id, rag_id, user_id)
+    save_user_rag_document(file_name, document_id, rag_id, user_id)
     return {"rag_id": document_id}
 
 
