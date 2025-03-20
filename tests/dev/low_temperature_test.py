@@ -27,7 +27,7 @@ class OllamaProdLLM(LLM):
             "prompt": prompt,
             "temperature": 0
         }
-        print("++ LLM Loading.. ++")
+        # print("++ LLM Loading.. ++")
 
         response = requests.post(url, json=data, headers=headers)
         if response.status_code == 200:

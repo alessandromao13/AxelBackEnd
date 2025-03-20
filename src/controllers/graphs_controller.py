@@ -14,11 +14,17 @@ router = APIRouter()
 
 @router.post("/generate-graph/{user_id}")
 def generate_graph(user_id: str, input_text: str = Body(...), topic: str = Body(...), summary: str = Body(...)):
-    # print(f"GOT topic {topic}, summary {summary}")
-    # fixme: generate_kg uses transformer, run_graph_generation_system uses llama
+    """
+     generate_kg uses transformer, run_graph_generation_system uses llama
+    :param user_id:
+    :param input_text:
+    :param topic:
+    :param summary:
+    :return: 200
+    """
     # generate_kg(input_text, user_id, topic, summary)
     run_graph_generation_system(input_text, user_id, topic, summary)
-    return "OK"
+    return 200
 
 
 @router.get("/get-graph-by-id/{graph_id}")
@@ -32,7 +38,7 @@ def get_graph_by_users_id(user_id):
 
 
 @router.post("/generate-rag-pdf/{user_id}")
-async def generate_graph(user_id: str, uploaded_file: UploadFile = File(...), topic: str = Form(...), summary: str = Form(...)):
+async def generate_rag(user_id: str, uploaded_file: UploadFile = File(...), topic: str = Form(...), summary: str = Form(...)):
     await manage_user_data(user_id, uploaded_file)
     return await manage_rag_production(user_id, uploaded_file)
 
@@ -45,9 +51,9 @@ def get_user_rags(user_id: str):
 
 @router.get("/get-user-document/{user_id}/{document_id}")
 def get_user_rags(user_id: str, document_id: str):
-    print("GOT REQUEST FOR PDF", document_id)
+    # print("++ GOT REQUEST FOR PDF", document_id)
     got_user_pdf = get_document_by_document_id(document_id, user_id)
-    print("GOT USER PDF", got_user_pdf)
+    # print("++ GOT USER PDF", got_user_pdf)
     return got_user_pdf
 
 

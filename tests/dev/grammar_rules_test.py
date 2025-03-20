@@ -34,7 +34,7 @@ class OllamaProdLLM(LLM):
             # "model": "llama3.2:1b",
             "prompt": prompt
         }
-        print("++ LLM Loading.. ++")
+        # print("++ LLM Loading.. ++")
 
         response = requests.post(url, json=data, headers=headers)
         if response.status_code == 200:

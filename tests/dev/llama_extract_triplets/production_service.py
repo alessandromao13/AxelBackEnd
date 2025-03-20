@@ -1,9 +1,7 @@
 import ast
-import json
 import os
-
+import json
 from langchain_core.prompts import PromptTemplate
-
 from src.llm.ollama_prod import OllamaProdLLM
 from src.persistence.mongoDB import save_partial_graph, save_failed_chunk, check_failed_chunk
 from src.services.prompt_service import get_data_check_template_array
@@ -15,7 +13,6 @@ from tests.dev.output_processing_service.response_processing_service import mana
 run_num = 1
 
 
-# todo: evaluate what is the best chunk length
 def chunk_text(text, max_length=1024):
     sentences = text.split('. ')
     chunks = []
@@ -23,12 +20,12 @@ def chunk_text(text, max_length=1024):
 
     for sentence in sentences:
         if len(current_chunk) + len(sentence) + 1 <= max_length:
-            current_chunk += sentence + '. '
+            current_chunk += sentence + " "
         else:
             chunks.append(current_chunk.strip())
-            current_chunk = sentence + '. '
+            current_chunk = sentence + " "
 
-    if current_chunk:
+    if current_chunk.strip():
         chunks.append(current_chunk.strip())
 
     return chunks
@@ -46,6 +43,7 @@ def chunk_text(text, max_length=1024):
 #         file.write(f"Response: {processed_result}\n")
 #         file.write("-" * 40 + "\n")
 #     return processed_result
+
 def generate_entities_from_chunk(text_chunk):
     llm_res = []
     entity_chain = create_entity_chain()
@@ -56,13 +54,14 @@ def generate_entities_from_chunk(text_chunk):
 
     # Open the file in append mode (creates the file if it doesn't exist)
     with open(output_file, "a") as file:
-        print(f"Processing chunk: {text_chunk}")
+        # print(f"++ Processing chunk: {text_chunk}")
         result = entity_chain.invoke({"input_text": text_chunk})
-        # processed_result = test_data_extraction(result)
-        processed_result = ast.literal_eval(result['text'])
-        # processed_result = json.loads(result['text'])
-        print("PROCESSED RESULT", processed_result)
-        # processed_result = manage_llm_response(result['text'])
+        try:
+            processed_result = json.loads(result['text'])
+        except (json.JSONDecodeError, KeyError) as e:
+            print(f"Error parsing JSON: {e}")
+            processed_result = None
+        # print("++ PROCESSED RESULT", processed_result)
         llm_res.append(result)
         file.write(f"Chunk: {text_chunk}\n")
         file.write(f"Response: {processed_result}\n")
@@ -81,20 +80,23 @@ def generate_triplets_from_chunk_and_entities(got_entities, chunk, user_id):
         os.makedirs(output_dir)
 
     with open(output_file, "a") as file:
-        print(f"Chunk: {chunk}")
+        # print(f"++ Chunk: {chunk}")
         # print(f"Entities: {got_entities}")
         result = triplet_chain.invoke({"detected_entities": got_entities, "input_text_chunk": chunk})
-        print("+++ TRIPLETS ", result)
-        # dict_result = parse_valid_python_dict_or_array(result['text'])
-        dict_result = ast.literal_eval(result['text'])
-        # dict_result = json.loads(result['text'])
+        # print("+++ TRIPLETS ", result)
+        try:
+            dict_result = json.loads(result['text'])
+        except (json.JSONDecodeError, KeyError) as e:
+            print(f"Error parsing JSON: {e}")
+            dict_result = None
+
         if dict_result:
             llm_res.append(result)
             file.write(f"Chunk: {chunk}\n")
             file.write(f"Entities: {got_entities}\n")
             file.write(f"Response: {result['text']}\n")
-            # print("GOT DICT RES", dict_result)
             file.write(f"Loaded dict: {dict_result}\n")
+            # print("++ GOT DICT RES", dict_result)
             save_partial_graph(dict_result, run_num, chunk, user_id)
         else:
             file.write(f"FAILED \n")
@@ -172,7 +174,7 @@ def extract_triplets_from_text(input_text, user_id):
         # extract entities from the sentence
         got_entities = generate_entities_from_chunk(chunk)
         # generate triplets based on sentence and entities detected
-        print("+++ GOT ENTITIES", got_entities)
+        # print("+++ GOT ENTITIES", got_entities)
         failed = generate_triplets_from_chunk_and_entities(got_entities, chunk, user_id)
 
         # save the failed runs
@@ -181,9 +183,9 @@ def extract_triplets_from_text(input_text, user_id):
 
     # check if any run failed
     if len(failed_extr) > 0:
-        print("RERUNNING FAILED EXTRACTIONS: ", failed_extr)
+        # print("+++ RERUNNING FAILED EXTRACTIONS: ", failed_extr)
         for fail in failed_extr:
-            print("RUNNING THIS ONE THAT FAILED", fail)
+            # print("+++ RUNNING THIS ONE THAT FAILED", fail)
             if fail is not [] and len(fail) > 0:
                 # re-run the failed ones
                 rerun_failed_extractions(fail, user_id)

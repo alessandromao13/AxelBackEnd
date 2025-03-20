@@ -13,14 +13,7 @@ from tests.dev.output_processing_service.response_processing_service import proc
 def produce_topic_and_summary(text):
     chain = create_summarization_chain()
     llm_result = chain.invoke({"text": text})
-    # modified_text = llm_result['text'].replace("'", '"').replace('"', '\\"')
-    # print("+++ GOT LLM RESULT", llm_result)
-    # processed_res = process_llm_response(llm_result)
-    # processed_res = test_data_extraction_dict(llm_result['text'])
-    # processed_res = ast.literal_eval(llm_result['text'])
-    print("+++ Topic and summary", llm_result)
     processed_res = json.loads(llm_result['text'])
-    # print("PROCESSED RESULT", processed_res)
     try:
         topic = processed_res['topic']
         summary = processed_res['summary']

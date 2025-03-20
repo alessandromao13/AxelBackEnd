@@ -24,7 +24,7 @@ def extract_tables_with_pdfplumber(content_path, file_to_read):
     # Convert to Path object
     full_path = Path(content_path) / file_to_read
     path = '../../assets/pdf/1234/ChatGPT_A_brief_narrative_review.pdf'
-    print(f"Reading from: {full_path} using pdfplumber")
+    # print(f"Reading from: {full_path} using pdfplumber")
     got_tables = []
     try:
         with pdfplumber.open(full_path) as pdf:  # Ensure full_path is a valid Path object

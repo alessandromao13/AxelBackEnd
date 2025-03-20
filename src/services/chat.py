@@ -80,20 +80,20 @@ def execute_chat_system(user_query, user_id, graph_id, thread_id):
     visited_nodes = None
     visited_edges = None
     # RAG Management and Context
-    print("++++ GETTING GRAPH WITH ID", graph_id)
+    # print("++++ GETTING GRAPH WITH ID", graph_id)
     graph = get_graph_by_id(graph_id)
-    print("_+++++++ GOT GRAPH FROM MONGO", graph)
+    # print("_+++++++ GOT GRAPH FROM MONGO", graph)
     if graph:
         got_context, visited_nodes, visited_edges = build_context(graph, user_query, graph_id)
-        print("GOT CONTEXT", got_context)
-        print("GOT VISITED NODES", visited_nodes)
-        print("GOT VISITED EDGES", visited_edges)
+        # print("GOT CONTEXT", got_context)
+        # print("GOT VISITED NODES", visited_nodes)
+        # print("GOT VISITED EDGES", visited_edges)
         chain = create_chain(visited_nodes)
-        print("GOT CONTEXT", got_context)
+        # print("GOT CONTEXT", got_context)
     else:
         got_context = build_context()
         chain = create_chain(None)
-    print("LAUNCHUNG CHAIN WITH QUERY", user_query)
+    # print("LAUNCHUNG CHAIN WITH QUERY", user_query)
     llm_result = execute_chat_request(user_query, got_context, chain, chat_history)
 
     #  Memory Management
